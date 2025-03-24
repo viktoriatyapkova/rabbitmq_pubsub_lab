@@ -1,0 +1,22 @@
+version: '3'
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+
+  publisher:
+    build: ./publisher
+    depends_on:
+      - rabbitmq
+
+  consumer1:
+    build: ./consumer1
+    depends_on:
+      - rabbitmq
+
+  consumer2:
+    build: ./consumer2
+    depends_on:
+      - rabbitmq
